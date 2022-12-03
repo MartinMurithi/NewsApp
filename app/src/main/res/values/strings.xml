@@ -1,0 +1,14 @@
+<resources>
+    <string name="app_name">News Room</string>
+    <string name="api_key">2ea5723cb0fd400caa1e549956f6580e</string>
+    <string name="progressDialogTitle">Fetching articles..</string>
+    <string name="categoryEntertainment">entertainment</string>
+    <string name="categoryBusiness">business</string>
+    <string name="categoryGeneral">general</string>
+    <string name="categorySports">sports</string>
+    <string name="categoryTechnology">technology</string>
+    <string name="categoryScience">science</string>
+    <string name="categoryHealth">health</string>
+    <string name="imageDescription">An image describing news context</string>
+    <string name="queryHint">Search news...</string>
+</resources>

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="Theme.NewsApp.Starting" parent="Theme.SplashScreen">
+        <!--Setting the splash screen background-->
+        <item name="windowSplashScreenBackground">@color/black</item>
+
+        <!--Add the windowSplashScreen Animated icon or drawable-->
+        <item name="windowSplashScreenAnimatedIcon">@drawable/splash_image_used</item>
+
+        <!--Duration for animated icons or images-->
+        <item name="windowSplashScreenAnimationDuration">200</item>
+
+        <!--Theme of activity that directly follows the splash screen-->
+        <item name="postSplashScreenTheme">@style/Theme.NewsApp</item>
+
+    </style>
+</resources>
