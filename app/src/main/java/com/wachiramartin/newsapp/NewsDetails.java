@@ -1,9 +1,17 @@
 package com.wachiramartin.newsapp;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.webkit.WebChromeClient;
+import android.webkit.WebSettings;
+import android.webkit.WebView;
+import android.webkit.WebViewClient;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
@@ -16,24 +24,23 @@ public class NewsDetails extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_news_details);
 
-        TextView newsDetailsContent, newsDetailsTitle, newsDetailsPublishTime, newsDetailsAuthor, newsDetailsDescription;
-        ImageView newsDetailsImage;
+        Toolbar toolbar = findViewById(R.id.toolbar_newsDetails);
+        setSupportActionBar(toolbar);
 
-        newsDetailsTitle = findViewById(R.id.tv_newsDetailsTitle);
-        newsDetailsPublishTime = findViewById(R.id.tv_newsDetailsPublishedTime);
-        newsDetailsAuthor = findViewById(R.id.tv_newDetailsAuthor);
-        newsDetailsContent = findViewById(R.id.tv_newsDetailsContent);
-        newsDetailsDescription = findViewById(R.id.tv_newsDetailsDescription);
-        newsDetailsImage = findViewById(R.id.iv_newsDetailsImage);
+        ProgressBar progressBar = findViewById(R.id.progressBar_newsDetails);
+
 
         Article article = (Article) getIntent().getSerializableExtra("data");
 
-        newsDetailsTitle.setText(article.getTitle());
-        newsDetailsDescription.setText(article.getDescription());
-        newsDetailsPublishTime.setText(article.getPublishedAt());
-        newsDetailsAuthor.setText(article.getAuthor());
-        newsDetailsContent.setText(article.getContent());
-        Glide.with(this).load(article.getUrlToImage()).into(newsDetailsImage);
+        progressBar.setVisibility(View.VISIBLE);
+        WebView webView = findViewById(R.id.webview);
+        WebSettings webSettings = webView.getSettings();
+        webSettings.getJavaScriptEnabled();
+        webView.setWebChromeClient(new WebChromeClient());
+        String url = article.getUrl();
+        webView.loadUrl(url);
+
+        progressBar.setVisibility(View.GONE);
 
     }
 }

@@ -1,9 +1,12 @@
-package com.wachiramartin.newsapp;
+package com.wachiramartin.newsapp.services;
 
 import android.content.Context;
 import android.widget.Toast;
 
+import com.wachiramartin.newsapp.R;
 import com.wachiramartin.newsapp.model.NewsAPIResponse;
+import com.wachiramartin.newsapp.services.CallNewsApi;
+import com.wachiramartin.newsapp.services.onFetchDataListener;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -36,7 +39,9 @@ public class RequestManager {
                         String message = response.message();
                         Toast.makeText(context, " Error : "+message, Toast.LENGTH_SHORT).show();
                     }
-                    listener.onFetchData(response.body().getArticles(), response.message());
+                    else if (response.body() != null) {
+                        listener.onFetchData(response.body().getArticles(), response.message());
+                    }
                 }
 
                 @Override

@@ -1,19 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/cv_newsHeadlineItem"
     android:elevation="4dp"
     android:layout_margin="8dp"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:backgroundTint="@color/white"
-    >
+    android:backgroundTint="@color/white">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="6dp">
+        android:layout_height="wrap_content">
 
         <TextView
             android:id="@+id/tv_newsHeadlines"
@@ -41,7 +38,6 @@
             android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
             android:maxLines="2"
-            android:text="~"
             android:padding="2dp"
             android:textStyle="bold"
             android:textColor="@color/purple_500"

@@ -2,10 +2,9 @@ package com.wachiramartin.newsapp;
 
 import static android.view.View.GONE;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SearchView;
-import androidx.cardview.widget.CardView;
+import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -13,10 +12,14 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.HorizontalScrollView;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
+import com.wachiramartin.newsapp.adapter.RecyclerViewAdapter;
+import com.wachiramartin.newsapp.adapter.RecyclerViewOnClickListener;
 import com.wachiramartin.newsapp.model.Article;
+import com.wachiramartin.newsapp.services.RequestManager;
+import com.wachiramartin.newsapp.services.onFetchDataListener;
 
 import java.util.List;
 
@@ -24,14 +27,16 @@ public class MainActivity extends AppCompatActivity implements RecyclerViewOnCli
 
     private Button categoryButtonBusiness,categoryButtonGeneral,categoryButtonHealth,categoryButtonTechnology,categoryButtonSports,categoryButtonScience,categoryButtonEntertainment;
     private SearchView searchView;
+    private Toolbar toolbar;
+    private ProgressBar progressBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //Handles the SplashScreen transition
-       // SplashScreen splashScreen = SplashScreen.installSplashScreen(this);
-
         setContentView(R.layout.activity_main);
+
+        toolbar = findViewById(R.id.toolbar_newsArticles);
+        setSupportActionBar(toolbar);
 
         categoryButtonBusiness = findViewById(R.id.btn_categoryBusiness);
         categoryButtonBusiness.setOnClickListener(this);
@@ -56,14 +61,20 @@ public class MainActivity extends AppCompatActivity implements RecyclerViewOnCli
 
         setSearchView();
 
+        progressBar = findViewById(R.id.progressBar_listArticles);
+        progressBar.setVisibility(View.VISIBLE);
+
         RequestManager requestManager = new RequestManager(MainActivity.this);
         requestManager.fetchNewsHeadlines(listener, "general", null);
+
+        progressBar.setVisibility(GONE);
     }
 
     private final onFetchDataListener listener = new onFetchDataListener() {
         @Override
         public void onFetchData(List<Article> newsResponses, String message) {
             setRecyclerView(newsResponses);
+     //       Toast.makeText(MainActivity.this, newsResponses.toString(), Toast.LENGTH_SHORT).show();
         }
 
         @Override
@@ -79,7 +90,6 @@ public class MainActivity extends AppCompatActivity implements RecyclerViewOnCli
             public boolean onQueryTextSubmit(String query) {
                 RequestManager requestManager = new RequestManager(MainActivity.this);
                 requestManager.fetchNewsHeadlines(listener, "general", query);
-
                 return true;
             }
 
@@ -93,7 +103,7 @@ public class MainActivity extends AppCompatActivity implements RecyclerViewOnCli
     private void setRecyclerView(List<Article> articleList){
         RecyclerView recyclerView = findViewById(R.id.rv_newsHeadlines);
         recyclerView.setHasFixedSize(true);
-        recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+   /*     recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
             public void onScrollStateChanged(@NonNull RecyclerView recyclerView, int newState) {
                 super.onScrollStateChanged(recyclerView, newState);
@@ -104,7 +114,6 @@ public class MainActivity extends AppCompatActivity implements RecyclerViewOnCli
                 super.onScrolled(recyclerView, dx, dy);
 
                 HorizontalScrollView horizontalScrollView = findViewById(R.id.horizontalScrollViewButtons);
-                CardView cardView= findViewById(R.id.cv_searchView);
 
                 if(dy > 0){
                     horizontalScrollView.setVisibility(GONE);
@@ -114,7 +123,7 @@ public class MainActivity extends AppCompatActivity implements RecyclerViewOnCli
                    // cardView.setVisibility(View.VISIBLE);
                 }
             }
-        });
+        });*/
         recyclerView.setLayoutManager(new LinearLayoutManager(MainActivity.this));
         RecyclerViewAdapter recyclerViewAdapter = new RecyclerViewAdapter(MainActivity.this, articleList, this);
         recyclerView.setAdapter(recyclerViewAdapter);

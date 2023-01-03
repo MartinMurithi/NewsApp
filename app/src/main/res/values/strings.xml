@@ -11,4 +11,5 @@
     <string name="categoryHealth">health</string>
     <string name="imageDescription">An image describing news context</string>
     <string name="queryHint">Search news...</string>
+    <string name="toolbar_title">News Room</string>
 </resources>

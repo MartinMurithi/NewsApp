@@ -1,4 +1,4 @@
-package com.wachiramartin.newsapp;
+package com.wachiramartin.newsapp.adapter;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -12,6 +12,7 @@ import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.wachiramartin.newsapp.R;
 import com.wachiramartin.newsapp.model.Article;
 
 import java.util.List;
@@ -31,7 +32,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     @Override
     public RecyclerViewAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.news_headline_item, parent, false);
-        return new ViewHolder(view) ;
+        return new ViewHolder(view);
     }
 
     @Override
@@ -53,7 +54,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         return articles.size();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder{
+    public static class ViewHolder extends RecyclerView.ViewHolder{
         TextView tv_headline, tv_source;
         ImageView iv_imgHeadline;
 

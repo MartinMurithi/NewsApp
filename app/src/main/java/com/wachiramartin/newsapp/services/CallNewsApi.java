@@ -1,4 +1,4 @@
-package com.wachiramartin.newsapp;
+package com.wachiramartin.newsapp.services;
 
 import com.wachiramartin.newsapp.model.NewsAPIResponse;
 
